@@ -1,0 +1,6 @@
+*.cache/
+*.sim/
+*.runs/
+*.srcs/
+*.hw/
+*.ip_user_files/

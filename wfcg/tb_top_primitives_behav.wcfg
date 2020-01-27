@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_top_primitives_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="tb_top_primitives" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="21712667fs"></ZoomStartTime>
+      <ZoomEndTime time="1427712668fs"></ZoomEndTime>
+      <Cursor1Time time="395713000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="189"></NameColumnWidth>
+      <ValueColumnWidth column_width="62"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="10" />
+   <wvobject fp_name="/tb_top_primitives/CLK" type="logic">
+      <obj_property name="ElementShortName">CLK</obj_property>
+      <obj_property name="ObjectShortName">CLK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top_primitives/SW" type="array">
+      <obj_property name="ElementShortName">SW[15:0]</obj_property>
+      <obj_property name="ObjectShortName">SW[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top_primitives/LED" type="array">
+      <obj_property name="ElementShortName">LED[15:0]</obj_property>
+      <obj_property name="ObjectShortName">LED[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top_primitives/SSEG_CA" type="array">
+      <obj_property name="ElementShortName">SSEG_CA[6:0]</obj_property>
+      <obj_property name="ObjectShortName">SSEG_CA[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top_primitives/SSEG_AN" type="array">
+      <obj_property name="ElementShortName">SSEG_AN[3:0]</obj_property>
+      <obj_property name="ObjectShortName">SSEG_AN[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top_primitives/BTN" type="array">
+      <obj_property name="ElementShortName">BTN[4:0]</obj_property>
+      <obj_property name="ObjectShortName">BTN[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top_primitives/dir" type="logic">
+      <obj_property name="ElementShortName">dir</obj_property>
+      <obj_property name="ObjectShortName">dir</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top_primitives/dut/sdi_sqi_direction" type="other">
+      <obj_property name="ElementShortName">sdi_sqi_direction</obj_property>
+      <obj_property name="ObjectShortName">sdi_sqi_direction</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top_primitives/JA" type="array">
+      <obj_property name="ElementShortName">JA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">JA[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="group38" type="group">
+      <obj_property name="label">DUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_cs_n" type="logic">
+         <obj_property name="ElementShortName">sram_cs_n</obj_property>
+         <obj_property name="ObjectShortName">sram_cs_n</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_sdi_serial_in_1" type="logic">
+         <obj_property name="ElementShortName">sram_sdi_serial_in_1</obj_property>
+         <obj_property name="ObjectShortName">sram_sdi_serial_in_1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_sdi_serial_out_1" type="logic">
+         <obj_property name="ElementShortName">sram_sdi_serial_out_1</obj_property>
+         <obj_property name="ObjectShortName">sram_sdi_serial_out_1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_extended_serial_out" type="logic">
+         <obj_property name="ElementShortName">sram_extended_serial_out</obj_property>
+         <obj_property name="ObjectShortName">sram_extended_serial_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_sqi_serial_in_2" type="logic">
+         <obj_property name="ElementShortName">sram_sqi_serial_in_2</obj_property>
+         <obj_property name="ObjectShortName">sram_sqi_serial_in_2</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_sqi_serial_out_2" type="logic">
+         <obj_property name="ElementShortName">sram_sqi_serial_out_2</obj_property>
+         <obj_property name="ObjectShortName">sram_sqi_serial_out_2</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_sdi_serial_in_0" type="logic">
+         <obj_property name="ElementShortName">sram_sdi_serial_in_0</obj_property>
+         <obj_property name="ObjectShortName">sram_sdi_serial_in_0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_sdi_serial_out_0" type="logic">
+         <obj_property name="ElementShortName">sram_sdi_serial_out_0</obj_property>
+         <obj_property name="ObjectShortName">sram_sdi_serial_out_0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_extended_serial_in" type="logic">
+         <obj_property name="ElementShortName">sram_extended_serial_in</obj_property>
+         <obj_property name="ObjectShortName">sram_extended_serial_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_sck" type="logic">
+         <obj_property name="ElementShortName">sram_sck</obj_property>
+         <obj_property name="ObjectShortName">sram_sck</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_extended_hold_n" type="logic">
+         <obj_property name="ElementShortName">sram_extended_hold_n</obj_property>
+         <obj_property name="ObjectShortName">sram_extended_hold_n</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_sqi_serial_in_3" type="logic">
+         <obj_property name="ElementShortName">sram_sqi_serial_in_3</obj_property>
+         <obj_property name="ObjectShortName">sram_sqi_serial_in_3</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sram_sqi_serial_out_3" type="logic">
+         <obj_property name="ElementShortName">sram_sqi_serial_out_3</obj_property>
+         <obj_property name="ObjectShortName">sram_sqi_serial_out_3</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sqi_serial_in" type="array">
+         <obj_property name="ElementShortName">sqi_serial_in[3:0]</obj_property>
+         <obj_property name="ObjectShortName">sqi_serial_in[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top_primitives/dut/sqi_serial_out" type="array">
+         <obj_property name="ElementShortName">sqi_serial_out[3:0]</obj_property>
+         <obj_property name="ObjectShortName">sqi_serial_out[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>
