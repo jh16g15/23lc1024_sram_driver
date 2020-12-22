@@ -26,17 +26,19 @@ architecture rtl of quad_seven_seg_driver is
     signal one_hot_char_sel_n : std_logic_vector(3 downto 0) := b"0111";
     
     signal slowclk : std_logic;
-    signal clk_div_counter : unsigned(16 downto 0) := (others => '0'); 
-    
+    signal clk_div_counter : unsigned(25 downto 0) := (others => '0'); 
+        
     -- for counter
     signal display_data : unsigned(15 downto 0) := (others=>'0');
     signal super_slow_counter : unsigned(10 downto 0); 
     signal super_slow_clk : std_logic;
     
+    -- new digit logic
+    signal digit_counter : unsigned(1 downto 0);
     
 begin
 
-    slowclk <= clk_div_counter(16);
+    slowclk <= clk_div_counter(25); -- (16) looks decent
     
     clk_div : process(clk) is
     begin
@@ -44,34 +46,36 @@ begin
             clk_div_counter <= clk_div_counter + 1;
         end if;
     end process clk_div;
-
-    sseg_an <= one_hot_char_sel_n;
---    sseg_an <= b"0000";
-
-    -- selects the active digit
-    char_counter : process(slowclk) is 
+    
+    -- active low char enables
+    sseg_an(3) <= '0' when digit_counter = 3 else '1';
+    sseg_an(2) <= '0' when digit_counter = 2 else '1';
+    sseg_an(1) <= '0' when digit_counter = 1 else '1';
+    sseg_an(0) <= '0' when digit_counter = 0 else '1';
+    
+    char_select : process(digit_counter) is 
+    begin
+        case(to_integer(digit_counter)) is 
+            when 0 => char_data <= std_logic_vector(display_data( 3 downto  0));
+            when 1 => char_data <= std_logic_vector(display_data( 7 downto  4));
+            when 2 => char_data <= std_logic_vector(display_data(11 downto  8));
+            when 3 => char_data <= std_logic_vector(display_data(15 downto 12)); 
+        end case;
+    end process char_select;
+    
+    digit_count : process(slowclk) is 
     begin
         if rising_edge(slowclk) then
-            case(one_hot_char_sel_n) is
-                when b"0111" => one_hot_char_sel_n <= b"1011"; char_data <= std_logic_vector(display_data( 3 downto  0));
-                when b"1011" => one_hot_char_sel_n <= b"1101"; char_data <= std_logic_vector(display_data( 7 downto  4));
-                when b"1101" => one_hot_char_sel_n <= b"1110"; char_data <= std_logic_vector(display_data(11 downto  8));
-                when b"1110" => one_hot_char_sel_n <= b"0111"; char_data <= std_logic_vector(display_data(15 downto 12));
-                when others  => one_hot_char_sel_n <= b"0111"; char_data <= x"F"; -- TODO add error response
-            end case;
+            digit_counter <= digit_counter + 1;
         end if;
-    end process char_counter;
+    end process digit_count;
+    
 
     display_data(15 downto 12) <= x"3";
     display_data(11 downto  8) <= x"2";
     display_data( 7 downto  4) <= x"1";
     display_data( 3 downto  0) <= x"0";
     
-    -- the above displays in this order: 3012
-    
-
-
---    char_data <= sw(3 downto 0);
     
 --    -- increment data to be displayed
 --    data_counter : process(super_slow_clk) is
