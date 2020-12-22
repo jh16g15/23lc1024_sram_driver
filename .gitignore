@@ -5,3 +5,6 @@
 *.hw/
 *.ip_user_files/
 *.pdf
+src/hex_to_bcd.vhd
+tb/tb_hex_to_bcd.vhd
+wfcg/tb_hex_to_bcd_behav.wcfg
