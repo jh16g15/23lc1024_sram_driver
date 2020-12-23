@@ -196,6 +196,10 @@ begin
 
     spi_mode_comb_proc : process(all) is 
     begin
+        -- defaults to prevent latches
+        -- data_shifter_in(3 downto 0) <= x"0"; -- this won't work as depending on SPI or SQI
+        -- serial_out(3 downto 0) <= x"0";
+          
         case(spi_mode) is
             when SPI => 
                 io_buf_output_disable <= b"0010";   -- set T
@@ -204,17 +208,17 @@ begin
                 -- TODO: These infer latches when synthesised
                 
                 serial_out(0) <= data_shifter_out(DATA_W-1+32); -- this goes to MOSI pin SI_SIO0
-                data_shifter_in(0) <= serial_in(1);             -- this comes from the MISO pin SO_SIO1
+--                data_shifter_in(0) <= serial_in(1);             -- this comes from the MISO pin SO_SIO1
                 
                 
-                
+                serial_out(1) <= '0'; --    unused, but needed to avoid latch
                 serial_out(2) <= '0'; --    SIO2, keep '0'
                 serial_out(3) <= '1'; --    HOLD_N, keep '1'
             when SQI => 
                 io_buf_output_disable <= (others => not sqi_pin_direction); -- set T
                 serial_out(3 downto 0) <= data_shifter_out(SPI_SHIFT_OUT_W-1 downto SPI_SHIFT_OUT_W-1-3);   -- output the top 4 bits of the output data shifter 
-                data_shifter_in(3 downto 0) <= serial_in(3 downto 0);                           -- take the serial_in as the bottom 4 bits of the input data_shifter
-                
+--                data_shifter_in(3 downto 0) <= serial_in(3 downto 0);                           -- take the serial_in as the bottom 4 bits of the input data_shifter
+            
         end case;
     end process spi_mode_comb_proc;
     
@@ -370,19 +374,23 @@ begin
                     
                     when RDATA =>
                         clk_counter <= clk_counter+1;
-                        data_shifter_in(DATA_W-1 downto 4) <= data_shifter_in(DATA_W-1-4 downto 0); -- bottom 4 bits are assigned combinationally to serial_in(3 downto 0) (from SIO3-SIO0)
+                        -- old, relied on latch
+                         -- data_shifter_in(DATA_W-1 downto 4) <= data_shifter_in(DATA_W-1-4 downto 0); -- bottom 4 bits are assigned combinationally to serial_in(3 downto 0) (from SIO3-SIO0)
+                        data_shifter_in(DATA_W-1 downto 0) <= data_shifter_in(DATA_W-1-4 downto 0) & serial_in (3 downto 0);
                         
                         if clk_counter = BYTES_TO_TRANSFER*2-1 then
                             state <= DEASSERT_CS;
                             CS_N <= '1';    -- 1/2 cycle after data has gone
                             SCK_EN <= '0';  -- and stop SCK
-                            
-                            rsp_rdata_out <= data_shifter_in;
+                            -- old, relied on latch
+--                            rsp_rdata_out <= data_shifter_in;
+                            rsp_rdata_out <= data_shifter_in(DATA_W-1-4 downto 0) & serial_in (3 downto 0);
                             rsp_valid_out <= '1';
                             
                         end if;
                         
                     when DEASSERT_CS =>
+                        sqi_pin_direction <= '1'; -- write
                         --  wait for response to be accepted and go back to IDLE ready to receive a new command
                         -- 
                         if rsp_ready_in = '1' then

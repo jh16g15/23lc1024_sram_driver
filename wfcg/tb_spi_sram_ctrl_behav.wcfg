@@ -11,13 +11,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="27920001fs"></ZoomEndTime>
-      <Cursor1Time time="18000000fs"></Cursor1Time>
+      <ZoomStartTime time="16101000fs"></ZoomStartTime>
+      <ZoomEndTime time="17501001fs"></ZoomEndTime>
+      <Cursor1Time time="16450100fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="181"></NameColumnWidth>
-      <ValueColumnWidth column_width="94"></ValueColumnWidth>
+      <ValueColumnWidth column_width="90"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="61" />
    <wvobject type="divider" fp_name="divider140">
@@ -199,6 +199,7 @@
       <wvobject fp_name="/tb_spi_sram_ctrl/u_spi_sram_ctrl/serial_in" type="array">
          <obj_property name="ElementShortName">serial_in[3:0]</obj_property>
          <obj_property name="ObjectShortName">serial_in[3:0]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject fp_name="/tb_spi_sram_ctrl/u_spi_sram_ctrl/serial_out" type="array">
          <obj_property name="ElementShortName">serial_out[3:0]</obj_property>
@@ -225,21 +226,21 @@
       <obj_property name="ElementShortName">CS_N</obj_property>
       <obj_property name="ObjectShortName">CS_N</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_spi_sram_ctrl/u_sram/SI_SIO0" type="logic">
-      <obj_property name="ElementShortName">SI_SIO0</obj_property>
-      <obj_property name="ObjectShortName">SI_SIO0</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_spi_sram_ctrl/u_sram/SO_SIO1" type="logic">
-      <obj_property name="ElementShortName">SO_SIO1</obj_property>
-      <obj_property name="ObjectShortName">SO_SIO1</obj_property>
+   <wvobject fp_name="/tb_spi_sram_ctrl/u_sram/HOLD_N_SIO3" type="logic">
+      <obj_property name="ElementShortName">HOLD_N_SIO3</obj_property>
+      <obj_property name="ObjectShortName">HOLD_N_SIO3</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_spi_sram_ctrl/u_sram/SIO2" type="logic">
       <obj_property name="ElementShortName">SIO2</obj_property>
       <obj_property name="ObjectShortName">SIO2</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_spi_sram_ctrl/u_sram/HOLD_N_SIO3" type="logic">
-      <obj_property name="ElementShortName">HOLD_N_SIO3</obj_property>
-      <obj_property name="ObjectShortName">HOLD_N_SIO3</obj_property>
+   <wvobject fp_name="/tb_spi_sram_ctrl/u_sram/SO_SIO1" type="logic">
+      <obj_property name="ElementShortName">SO_SIO1</obj_property>
+      <obj_property name="ObjectShortName">SO_SIO1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_spi_sram_ctrl/u_sram/SI_SIO0" type="logic">
+      <obj_property name="ElementShortName">SI_SIO0</obj_property>
+      <obj_property name="ObjectShortName">SI_SIO0</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_spi_sram_ctrl/u_sram/RESET" type="logic">
       <obj_property name="ElementShortName">RESET</obj_property>
