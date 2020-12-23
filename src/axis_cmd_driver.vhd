@@ -21,11 +21,18 @@ entity axis_cmd_driver is
     );
     Port ( clk : in STD_LOGIC;
            reset : in STD_LOGIC;
-           ready_in : in STD_LOGIC;
-           valid_out : out STD_LOGIC;
-           address_out : out STD_LOGIC_VECTOR(ADDR_W-1 downto 0);
-           rw_out : out STD_LOGIC;
-           data_out : out STD_LOGIC_VECTOR(DATA_W-1 downto 0)
+           cmd_ready_in : in STD_LOGIC;
+           cmd_valid_out : out STD_LOGIC;
+           cmd_address_out : out STD_LOGIC_VECTOR(ADDR_W-1 downto 0);
+           cmd_rw_out : out STD_LOGIC;
+           cmd_data_out : out STD_LOGIC_VECTOR(DATA_W-1 downto 0);
+           
+           rsp_rdata_in  : in STD_LOGIC_VECTOR(DATA_W-1 downto 0);
+           rsp_valid_in : in STD_LOGIC;
+           rsp_ready_out : out STD_LOGIC;
+           
+           error_count_out : out STD_LOGIC_VECTOR(16-1 downto 0);
+           all_cmds_done_out : out std_logic
    );
 end axis_cmd_driver;
 
@@ -64,35 +71,101 @@ architecture Behavioral of axis_cmd_driver is
     signal rom_addr : integer := 0;
     signal rom_data : std_logic_vector(ROM_W-1 downto 0);
     
-    signal valid : std_logic := '0';
+    
+    type t_state is (SEND_CMD, AWAIT_RESPONSE, DONE);
+    signal state : t_state; 
+    
+    signal error_counter : unsigned(15 downto 0):= (others => '0'); 
     
 begin
 
     -- output assignments
-    rw_out <= rom_data(ADDR_W + DATA_W);    -- we have CMD_W bits reserved for this, but we just need the bottom one
-    address_out <= rom_data(ADDR_W + DATA_W -1 downto DATA_W);
-    data_out <= rom_data(DATA_W-1 downto 0);
-    valid_out <= valid;
+--    rw_out <= rom_data(ADDR_W + DATA_W);    -- we have CMD_W bits reserved for this, but we just need the bottom one
+--    address_out <= rom_data(ADDR_W + DATA_W -1 downto DATA_W);
+--    data_out <= rom_data(DATA_W-1 downto 0);
+--    valid_out <= valid;
 
-    process(clk, reset)    
-    begin
+    error_count_out <= std_logic_vector(error_counter);
+
+
+    -- TODO: This currently does not infer into BRAMs 
+    --
+    process(clk, reset)
+    begin 
         if rising_edge(clk) then
-        
-        
-            -- axi (master) handshake - we can't wait on a ready before we assert Valid
-            
-            valid <= '1';                               -- next word valid 
-            rom_data <= to_stdlogicvector(RAM(rom_addr));   -- get the next word from the ROM
-            if ready_in = '1' then                              -- transaction accepted
-                rom_addr <= rom_addr + 1;                       -- set up the address for the word after that
-            end if;
+            case(state) is
+                when SEND_CMD => 
+                    cmd_valid_out   <= '1';
+                    cmd_rw_out      <= to_stdlogicvector(RAM(rom_addr))(ADDR_W + DATA_W); -- we have CMD_W bits reserved for this, but we just need the bottom one ('1' for write, '0' for read)
+                    cmd_address_out    <= to_stdlogicvector(RAM(rom_addr))(ADDR_W + DATA_W -1 downto DATA_W); 
+                    cmd_data_out      <= to_stdlogicvector(RAM(rom_addr))(DATA_W-1 downto 0); -- this is expected rdata if this is a "read" operation, else wdata
+                    
+                    -- if slave can accept command
+                    if cmd_ready_in = '1' then
+                        state <= AWAIT_RESPONSE;
+                        rsp_ready_out <= '1';
+                    end if;
+                    
+                when AWAIT_RESPONSE => 
+                    cmd_valid_out <= '0';
+                    
+                    if rsp_valid_in = '1' then
+                        rsp_ready_out <= '0';
+                        
+                        if cmd_rw_out = '0' then -- if read response
+                            if rsp_rdata_in /= cmd_data_out then    -- if there is a mismatch
+                                error_counter <= error_counter + 1;
+                            end if;
+                        end if;
+                        
+                        if rom_addr = NUM_COMMANDS-1 then
+                            state <= DONE;
+                            all_cmds_done_out <= '1';
+                        else
+                            rom_addr <= rom_addr + 1; -- move to next command
+                            state <= SEND_CMD;
+                            
+                        end if;
+                        
+                    end if;
+                    
+                when DONE => 
+                    
+                    
+                    
+            end case;
         end if;
         if reset = '1' then
-            valid <= '0';
-            rom_data <= (others => '1');
+            cmd_valid_out <= '0';
+            rsp_ready_out <= '0';
             rom_addr <= 0;
+            state <= SEND_CMD;
+            error_counter <= (others => '0');
+            all_cmds_done_out <= '0';
         end if;
     end process;
+
+
+
+--    process(clk, reset)    
+--    begin
+--        if rising_edge(clk) then
+        
+        
+--            -- axi (master) handshake - we can't wait on a ready before we assert Valid
+            
+--            valid <= '1';                               -- next word valid 
+--            rom_data <= to_stdlogicvector(RAM(rom_addr));   -- get the next word from the ROM
+--            if ready_in = '1' then                              -- transaction accepted
+--                rom_addr <= rom_addr + 1;                       -- set up the address for the word after that
+--            end if;
+--        end if;
+--        if reset = '1' then
+--            valid <= '0';
+--            rom_data <= (others => '1');
+--            rom_addr <= 0;
+--        end if;
+--    end process;
 
 
 

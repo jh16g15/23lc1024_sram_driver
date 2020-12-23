@@ -62,8 +62,7 @@ begin
     
     clk <= not clk after 25ns; -- 50 ns period for 20MHz clock
     
-    rsp_ready <= '1';
-    
+  
 
 --    u_spi_sram_ctrl : entity work.spi_sram_ctrl
 --    port map(
@@ -115,14 +114,23 @@ begin
 
     
     u_axis_cmd_driver : entity work.axis_cmd_driver
+    generic map(
+        NUM_COMMANDS => 16
+    )
     port map(
         clk        => clk,
         reset      => reset,
-        ready_in   => cmd_ready,
-        valid_out  => cmd_valid,
-        address_out=> cmd_address,
-        rw_out     => cmd_rw, 
-        data_out   => cmd_wdata
+        cmd_ready_in   => cmd_ready,
+        cmd_valid_out  => cmd_valid,
+        cmd_address_out=> cmd_address,
+        cmd_rw_out     => cmd_rw, 
+        cmd_data_out   => cmd_wdata,
+        
+        rsp_rdata_in => rsp_rdata,
+        rsp_valid_in => rsp_valid,
+        rsp_ready_out => rsp_ready,
+        
+        error_count_out => open
     );     
     
     u_sram : entity work.M23LC1024

@@ -27,6 +27,13 @@ import argparse
 #   default=0               Sets the default value 
 
 
+# Theoretical bandwidth
+# assuming 32 bit transfers @ 20MHz
+# write - 16 cycles
+#
+# read - 18 cycles
+#
+
 parser = argparse.ArgumentParser(description="Creates a .hex memory file from a list of commands in a text file")
 
 parser.add_argument("--address_width",  "-aw",  type=int,   default=32,         help="Set the Address Width (in bits)")
@@ -57,32 +64,32 @@ with open(args.script_file, "r", encoding='utf-8') as f_in:
                     
                     # Command Type
                     if cmd[1] == "R":
-                        print("=========== READ =============")
+                        # print("=========== READ =============")
                         cmd_hex.append("0")
                     elif cmd[1] == "W":
-                        print("=========== WRITE ============")
+                        # print("=========== WRITE ============")
                         cmd_hex.append("1")
                     else:
                         raise ValueError(f"Unrecognised cmd type {cmd[1]}")
-                    print(f"with type:{cmd_hex}")
+                    # print(f"with type:{cmd_hex}")
                     
                     # Address
-                    print(f"raw_addr: {cmd[0]}")
+                    # print(f"raw_addr: {cmd[0]}")
                     addr = cmd[0].replace("0X", "") # remove 0x prefix if present
                     cmd_hex.append(addr)
-                    print(f"with addr:{cmd_hex}")
+                    # print(f"with addr:{cmd_hex}")
 
                     # Data (if present)
                     
 
                     if len(cmd) == 3:
-                        print(f"raw_data: {cmd[2]}")
+                        # print(f"raw_data: {cmd[2]}")
                         data = cmd[2].replace("0X", "") # remove 0x prefix if present
                     else:
                         data = "00000000"
                     cmd_hex.append(data)
                     
-                    print(f"with data:{cmd_hex}")
+                    # print(f"with data:{cmd_hex}")
                     # Join all together and send to output file
                     cmd_hex.append("\n")
                     empty_string=""
