@@ -10,9 +10,7 @@ entity quad_seven_seg_driver is
     );
     port(
         clk     : in    std_logic;
---        data_in : in    std_logic_vector(15 downto 0);
-        
-        sw      : in    std_logic_vector(15 downto 0);
+        display_data_in : in    std_logic_vector(15 downto 0);
         
         sseg_ca : out   std_logic_vector(7 downto 0); -- segment select
         sseg_an : out   std_logic_vector(3 downto 0) := x"1" -- char select
@@ -38,7 +36,7 @@ architecture rtl of quad_seven_seg_driver is
     
 begin
 
-    slowclk <= clk_div_counter(25); -- (16) looks decent
+    slowclk <= clk_div_counter(16); -- (16) looks decent
     
     clk_div : process(clk) is
     begin
@@ -53,7 +51,7 @@ begin
     sseg_an(1) <= '0' when digit_counter = 1 else '1';
     sseg_an(0) <= '0' when digit_counter = 0 else '1';
     
-    char_select : process(digit_counter) is 
+    char_select : process(digit_counter, display_data) is 
     begin
         case(to_integer(digit_counter)) is 
             when 0 => char_data <= std_logic_vector(display_data( 3 downto  0));
@@ -71,10 +69,11 @@ begin
     end process digit_count;
     
 
-    display_data(15 downto 12) <= x"3";
-    display_data(11 downto  8) <= x"2";
-    display_data( 7 downto  4) <= x"1";
-    display_data( 3 downto  0) <= x"0";
+--    -- hardcoded display_data ( no longer in use)
+--    display_data(15 downto 12) <= x"3";
+--    display_data(11 downto  8) <= x"2";
+--    display_data( 7 downto  4) <= x"1";
+--    display_data( 3 downto  0) <= x"0";
     
     
 --    -- increment data to be displayed

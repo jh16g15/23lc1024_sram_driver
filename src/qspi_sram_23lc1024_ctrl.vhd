@@ -199,8 +199,15 @@ begin
         case(spi_mode) is
             when SPI => 
                 io_buf_output_disable <= b"0010";   -- set T
+                
+                
+                -- TODO: These infer latches when synthesised
+                
                 serial_out(0) <= data_shifter_out(DATA_W-1+32); -- this goes to MOSI pin SI_SIO0
                 data_shifter_in(0) <= serial_in(1);             -- this comes from the MISO pin SO_SIO1
+                
+                
+                
                 serial_out(2) <= '0'; --    SIO2, keep '0'
                 serial_out(3) <= '1'; --    HOLD_N, keep '1'
             when SQI => 

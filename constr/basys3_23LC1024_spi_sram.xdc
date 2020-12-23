@@ -149,8 +149,8 @@ set_property PACKAGE_PIN L2 [get_ports SI_SIO0]
 set_property PACKAGE_PIN J2 [get_ports SCK]					
 	set_property IOSTANDARD LVCMOS33 [get_ports SCK]
 #Sch name = JA4
-set_property PACKAGE_PIN G2 [get_ports SIO3_HOLD_N]					
-	set_property IOSTANDARD LVCMOS33 [get_ports SIO3_HOLD_N]
+set_property PACKAGE_PIN G2 [get_ports HOLD_N_SIO3]					
+	set_property IOSTANDARD LVCMOS33 [get_ports HOLD_N_SIO3]
 ##Sch name = JA7
 #set_property PACKAGE_PIN H1 [get_ports {JA[4]}]					
 #	set_property IOSTANDARD LVCMOS33 [get_ports {JA[4]}]
