@@ -27,7 +27,6 @@ architecture rtl of quad_seven_seg_driver is
     signal clk_div_counter : unsigned(25 downto 0) := (others => '0'); 
         
     -- for counter
-    signal display_data : unsigned(15 downto 0) := (others=>'0');
     signal super_slow_counter : unsigned(10 downto 0); 
     signal super_slow_clk : std_logic;
     
@@ -51,13 +50,13 @@ begin
     sseg_an(1) <= '0' when digit_counter = 1 else '1';
     sseg_an(0) <= '0' when digit_counter = 0 else '1';
     
-    char_select : process(digit_counter, display_data) is 
+    char_select : process(digit_counter, display_data_in) is 
     begin
         case(to_integer(digit_counter)) is 
-            when 0 => char_data <= std_logic_vector(display_data( 3 downto  0));
-            when 1 => char_data <= std_logic_vector(display_data( 7 downto  4));
-            when 2 => char_data <= std_logic_vector(display_data(11 downto  8));
-            when 3 => char_data <= std_logic_vector(display_data(15 downto 12)); 
+            when 0 => char_data <= std_logic_vector(display_data_in( 3 downto  0));
+            when 1 => char_data <= std_logic_vector(display_data_in( 7 downto  4));
+            when 2 => char_data <= std_logic_vector(display_data_in(11 downto  8));
+            when 3 => char_data <= std_logic_vector(display_data_in(15 downto 12)); 
         end case;
     end process char_select;
     
