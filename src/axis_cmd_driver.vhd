@@ -21,15 +21,15 @@ entity axis_cmd_driver is
     );
     Port ( clk : in STD_LOGIC;
            reset : in STD_LOGIC;
-           cmd_ready_in : in STD_LOGIC;
-           cmd_valid_out : out STD_LOGIC;
-           cmd_address_out : out STD_LOGIC_VECTOR(ADDR_W-1 downto 0);
-           cmd_rw_out : out STD_LOGIC;
-           cmd_data_out : out STD_LOGIC_VECTOR(DATA_W-1 downto 0);
+           cmd_ready_in     : in STD_LOGIC;
+           cmd_valid_out    : out STD_LOGIC;
+           cmd_address_out  : out STD_LOGIC_VECTOR(ADDR_W-1 downto 0);
+           cmd_rw_out       : out STD_LOGIC;
+           cmd_data_out     : out STD_LOGIC_VECTOR(DATA_W-1 downto 0);
            
-           rsp_rdata_in  : in STD_LOGIC_VECTOR(DATA_W-1 downto 0);
-           rsp_valid_in : in STD_LOGIC;
-           rsp_ready_out : out STD_LOGIC;
+           rsp_rdata_in     : in STD_LOGIC_VECTOR(DATA_W-1 downto 0);
+           rsp_valid_in     : in STD_LOGIC;
+           rsp_ready_out    : out STD_LOGIC;
            
            error_count_out : out STD_LOGIC_VECTOR(16-1 downto 0);
            all_cmds_done_out : out std_logic
@@ -65,9 +65,13 @@ architecture Behavioral of axis_cmd_driver is
         end loop;
         return RAM;
     end function;
-        
-    signal RAM : RamType := InitRamFromFile(DATA_FILE);
     
+    signal RAM : RamType := InitRamFromFile(DATA_FILE);
+    -- this doesn't do anything
+    attribute ram_style : string;
+    attribute ram_style of RAM : signal is "bram";
+    
+    signal rom_en : std_logic;
     signal rom_addr : integer := 0;
     signal rom_data : std_logic_vector(ROM_W-1 downto 0);
     
@@ -77,12 +81,17 @@ architecture Behavioral of axis_cmd_driver is
     
     signal error_counter : unsigned(15 downto 0):= (others => '0'); 
     
+    attribute MARK_DEBUG : boolean;
+    attribute MARK_DEBUG of error_counter : signal is True;
+    attribute MARK_DEBUG of state : signal is True;
+    attribute MARK_DEBUG of all_cmds_done_out : signal is True;
+    
 begin
 
     -- output assignments
---    rw_out <= rom_data(ADDR_W + DATA_W);    -- we have CMD_W bits reserved for this, but we just need the bottom one
---    address_out <= rom_data(ADDR_W + DATA_W -1 downto DATA_W);
---    data_out <= rom_data(DATA_W-1 downto 0);
+    cmd_rw_out <= rom_data(ADDR_W + DATA_W);    -- we have CMD_W bits reserved for this, but we just need the bottom one
+    cmd_address_out <= rom_data(ADDR_W + DATA_W -1 downto DATA_W);
+    cmd_data_out <= rom_data(DATA_W-1 downto 0);
 --    valid_out <= valid;
 
     error_count_out <= std_logic_vector(error_counter);
@@ -96,9 +105,10 @@ begin
             case(state) is
                 when SEND_CMD => 
                     cmd_valid_out   <= '1';
-                    cmd_rw_out      <= to_stdlogicvector(RAM(rom_addr))(ADDR_W + DATA_W); -- we have CMD_W bits reserved for this, but we just need the bottom one ('1' for write, '0' for read)
-                    cmd_address_out    <= to_stdlogicvector(RAM(rom_addr))(ADDR_W + DATA_W -1 downto DATA_W); 
-                    cmd_data_out      <= to_stdlogicvector(RAM(rom_addr))(DATA_W-1 downto 0); -- this is expected rdata if this is a "read" operation, else wdata
+                    -- this now handled in a separate seq process & combinationally above to split rom_data
+--                    cmd_rw_out      <= to_stdlogicvector(RAM(rom_addr))(ADDR_W + DATA_W); -- we have CMD_W bits reserved for this, but we just need the bottom one ('1' for write, '0' for read)
+--                    cmd_address_out    <= to_stdlogicvector(RAM(rom_addr))(ADDR_W + DATA_W -1 downto DATA_W); 
+--                    cmd_data_out      <= to_stdlogicvector(RAM(rom_addr))(DATA_W-1 downto 0); -- this is expected rdata if this is a "read" operation, else wdata
                     
                     -- if slave can accept command
                     if cmd_ready_in = '1' then
@@ -144,6 +154,26 @@ begin
             all_cmds_done_out <= '0';
         end if;
     end process;
+
+-- move to a separate RAM process to help synthesis correctly infer BRAMs 
+
+
+
+-- from UG901 Single Port Block RAM No-Change Mode (pg 123)
+-- modified to remove WRITE
+
+-- does this need to be gated by the above process?
+rom_en <= '1';
+
+
+ process(clk)
+ begin
+     if rising_edge(clk) then
+        if rom_en = '1' then
+            rom_data <= to_std_logic_vector(RAM(rom_addr));
+        end if;
+    end if;
+ end process;
 
 
 

@@ -18,18 +18,18 @@ ADDR_INC = 4                # 4 bytes per address
 
 RAND_MAX = 4294967295
 
-NUMBER_OF_TESTS = ADDR_LIMIT_HIGH /4
+TEST_ADDR_LIMIT = 131072 / 4  # test first quarter (read+write = half addresses)
+
+# only test bottom bank
+NUMBER_OF_TESTS = TEST_ADDR_LIMIT * 2 /ADDR_INC
 
 print ("Number of Tests: " + str(NUMBER_OF_TESTS))
 
 with open(OUTFILE_NAME, "w", encoding='utf-8') as f_out:
 
-    
-    
-
     # write to all the addresses
     random.seed(0)
-    for addr in range(ADDR_LIMIT_LOW, ADDR_LIMIT_HIGH, ADDR_INC): 
+    for addr in range(ADDR_LIMIT_LOW, int(TEST_ADDR_LIMIT), ADDR_INC): 
         hex_addr = f'{addr:08x}'  # string format into 0-padded 8 char hex
         
         data = (random.randint(0, RAND_MAX)) # choose random data word
@@ -39,7 +39,7 @@ with open(OUTFILE_NAME, "w", encoding='utf-8') as f_out:
 
     # read back from all the addresses
     random.seed(0)
-    for addr in range(ADDR_LIMIT_LOW, ADDR_LIMIT_HIGH, ADDR_INC):
+    for addr in range(ADDR_LIMIT_LOW, int(TEST_ADDR_LIMIT), ADDR_INC):
         hex_addr = f'{addr:08x}'  # string format into 0-padded 8 char hex
         
         data = (random.randint(0, RAND_MAX)) # choose random data word
