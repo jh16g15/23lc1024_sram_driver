@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_basys3_top_spi_ram_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_basys3_top_spi_ram" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="7060001fs"></ZoomEndTime>
+      <Cursor1Time time="545100fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="181"></NameColumnWidth>
+      <ValueColumnWidth column_width="78"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="56" />
+   <wave_markers>
+      <marker time="1495000" label="" />
+   </wave_markers>
+   <wvobject type="divider" fp_name="divider376">
+      <obj_property name="label">Testbench</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/CLK" type="logic">
+      <obj_property name="ElementShortName">CLK</obj_property>
+      <obj_property name="ObjectShortName">CLK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/SSEG_CA" type="array">
+      <obj_property name="ElementShortName">SSEG_CA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">SSEG_CA[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/SSEG_AN" type="array">
+      <obj_property name="ElementShortName">SSEG_AN[3:0]</obj_property>
+      <obj_property name="ObjectShortName">SSEG_AN[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider375">
+      <obj_property name="label">SRAM</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/SI_SIO0" type="logic">
+      <obj_property name="ElementShortName">SI_SIO0</obj_property>
+      <obj_property name="ObjectShortName">SI_SIO0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/SCK" type="logic">
+      <obj_property name="ElementShortName">SCK</obj_property>
+      <obj_property name="ObjectShortName">SCK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/CS_N" type="logic">
+      <obj_property name="ElementShortName">CS_N</obj_property>
+      <obj_property name="ObjectShortName">CS_N</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/SIO2" type="logic">
+      <obj_property name="ElementShortName">SIO2</obj_property>
+      <obj_property name="ObjectShortName">SIO2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/HOLD_N_SIO3" type="logic">
+      <obj_property name="ElementShortName">HOLD_N_SIO3</obj_property>
+      <obj_property name="ObjectShortName">HOLD_N_SIO3</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/RESET" type="logic">
+      <obj_property name="ElementShortName">RESET</obj_property>
+      <obj_property name="ObjectShortName">RESET</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/SO_SIO1" type="logic">
+      <obj_property name="ElementShortName">SO_SIO1</obj_property>
+      <obj_property name="ObjectShortName">SO_SIO1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/DataShifterI" type="array">
+      <obj_property name="ElementShortName">DataShifterI[7:0]</obj_property>
+      <obj_property name="ObjectShortName">DataShifterI[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/DataShifterO" type="array">
+      <obj_property name="ElementShortName">DataShifterO[7:0]</obj_property>
+      <obj_property name="ObjectShortName">DataShifterO[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/ClockCounter" type="array">
+      <obj_property name="ElementShortName">ClockCounter[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ClockCounter[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/InstRegister" type="array">
+      <obj_property name="ElementShortName">InstRegister[7:0]</obj_property>
+      <obj_property name="ObjectShortName">InstRegister[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/AddrRegister" type="array">
+      <obj_property name="ElementShortName">AddrRegister[16:0]</obj_property>
+      <obj_property name="ObjectShortName">AddrRegister[16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/InstructionREAD" type="logic">
+      <obj_property name="ElementShortName">InstructionREAD</obj_property>
+      <obj_property name="ObjectShortName">InstructionREAD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/InstructionRDMR" type="logic">
+      <obj_property name="ElementShortName">InstructionRDMR</obj_property>
+      <obj_property name="ObjectShortName">InstructionRDMR</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/InstructionWRMR" type="logic">
+      <obj_property name="ElementShortName">InstructionWRMR</obj_property>
+      <obj_property name="ObjectShortName">InstructionWRMR</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/InstructionWRITE" type="logic">
+      <obj_property name="ElementShortName">InstructionWRITE</obj_property>
+      <obj_property name="ObjectShortName">InstructionWRITE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/InstructionEDIO" type="logic">
+      <obj_property name="ElementShortName">InstructionEDIO</obj_property>
+      <obj_property name="ObjectShortName">InstructionEDIO</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/InstructionEQIO" type="logic">
+      <obj_property name="ElementShortName">InstructionEQIO</obj_property>
+      <obj_property name="ObjectShortName">InstructionEQIO</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/InstructionRSTIO" type="logic">
+      <obj_property name="ElementShortName">InstructionRSTIO</obj_property>
+      <obj_property name="ObjectShortName">InstructionRSTIO</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/OpMode" type="array">
+      <obj_property name="ElementShortName">OpMode[1:0]</obj_property>
+      <obj_property name="ObjectShortName">OpMode[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/IOMode" type="array">
+      <obj_property name="ElementShortName">IOMode[1:0]</obj_property>
+      <obj_property name="ObjectShortName">IOMode[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/Hold" type="logic">
+      <obj_property name="ElementShortName">Hold</obj_property>
+      <obj_property name="ObjectShortName">Hold</obj_property>
+   </wvobject>
+   <wvobject fp_name="group423" type="group">
+      <obj_property name="label">Memory</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00000" type="array">
+         <obj_property name="ElementShortName">MemoryByte00000[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00000[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00001" type="array">
+         <obj_property name="ElementShortName">MemoryByte00001[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00001[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00002" type="array">
+         <obj_property name="ElementShortName">MemoryByte00002[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00002[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00003" type="array">
+         <obj_property name="ElementShortName">MemoryByte00003[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00003[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00004" type="array">
+         <obj_property name="ElementShortName">MemoryByte00004[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00004[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00005" type="array">
+         <obj_property name="ElementShortName">MemoryByte00005[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00005[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00006" type="array">
+         <obj_property name="ElementShortName">MemoryByte00006[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00006[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00007" type="array">
+         <obj_property name="ElementShortName">MemoryByte00007[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00007[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00008" type="array">
+         <obj_property name="ElementShortName">MemoryByte00008[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00008[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte00009" type="array">
+         <obj_property name="ElementShortName">MemoryByte00009[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte00009[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte0000A" type="array">
+         <obj_property name="ElementShortName">MemoryByte0000A[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte0000A[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte0000B" type="array">
+         <obj_property name="ElementShortName">MemoryByte0000B[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte0000B[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte0000C" type="array">
+         <obj_property name="ElementShortName">MemoryByte0000C[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte0000C[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte0000D" type="array">
+         <obj_property name="ElementShortName">MemoryByte0000D[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte0000D[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte0000E" type="array">
+         <obj_property name="ElementShortName">MemoryByte0000E[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte0000E[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte0000F" type="array">
+         <obj_property name="ElementShortName">MemoryByte0000F[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte0000F[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte1FFFC" type="array">
+         <obj_property name="ElementShortName">MemoryByte1FFFC[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte1FFFC[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte1FFFD" type="array">
+         <obj_property name="ElementShortName">MemoryByte1FFFD[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte1FFFD[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte1FFFE" type="array">
+         <obj_property name="ElementShortName">MemoryByte1FFFE[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte1FFFE[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/MemoryByte1FFFF" type="array">
+         <obj_property name="ElementShortName">MemoryByte1FFFF[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MemoryByte1FFFF[7:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/TimingCheckEnable" type="logic">
+      <obj_property name="ElementShortName">TimingCheckEnable</obj_property>
+      <obj_property name="ObjectShortName">TimingCheckEnable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/SPITimingCheckEnable" type="logic">
+      <obj_property name="ElementShortName">SPITimingCheckEnable</obj_property>
+      <obj_property name="ObjectShortName">SPITimingCheckEnable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/SDITimingCheckEnable" type="logic">
+      <obj_property name="ElementShortName">SDITimingCheckEnable</obj_property>
+      <obj_property name="ObjectShortName">SDITimingCheckEnable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_sram/SQITimingCheckEnable" type="logic">
+      <obj_property name="ElementShortName">SQITimingCheckEnable</obj_property>
+      <obj_property name="ObjectShortName">SQITimingCheckEnable</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider428">
+      <obj_property name="label">QSPI Controller</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/spi_clk" type="logic">
+      <obj_property name="ElementShortName">spi_clk</obj_property>
+      <obj_property name="ObjectShortName">spi_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="group437" type="group">
+      <obj_property name="label">cmd/rsp interface</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/cmd_ready_out" type="logic">
+         <obj_property name="ElementShortName">cmd_ready_out</obj_property>
+         <obj_property name="ObjectShortName">cmd_ready_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/cmd_valid_in" type="logic">
+         <obj_property name="ElementShortName">cmd_valid_in</obj_property>
+         <obj_property name="ObjectShortName">cmd_valid_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/cmd_address_in" type="array">
+         <obj_property name="ElementShortName">cmd_address_in[16:0]</obj_property>
+         <obj_property name="ObjectShortName">cmd_address_in[16:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/cmd_rw_in" type="logic">
+         <obj_property name="ElementShortName">cmd_rw_in</obj_property>
+         <obj_property name="ObjectShortName">cmd_rw_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/cmd_wdata_in" type="array">
+         <obj_property name="ElementShortName">cmd_wdata_in[31:0]</obj_property>
+         <obj_property name="ObjectShortName">cmd_wdata_in[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/rsp_rdata_out" type="array">
+         <obj_property name="ElementShortName">rsp_rdata_out[31:0]</obj_property>
+         <obj_property name="ObjectShortName">rsp_rdata_out[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/rsp_ready_in" type="logic">
+         <obj_property name="ElementShortName">rsp_ready_in</obj_property>
+         <obj_property name="ObjectShortName">rsp_ready_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/rsp_valid_out" type="logic">
+         <obj_property name="ElementShortName">rsp_valid_out</obj_property>
+         <obj_property name="ObjectShortName">rsp_valid_out</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/state" type="other">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/spi_mode" type="other">
+      <obj_property name="ElementShortName">spi_mode</obj_property>
+      <obj_property name="ObjectShortName">spi_mode</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/SCK_EN" type="logic">
+      <obj_property name="ElementShortName">SCK_EN</obj_property>
+      <obj_property name="ObjectShortName">SCK_EN</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/sqi_pin_direction" type="logic">
+      <obj_property name="ElementShortName">sqi_pin_direction</obj_property>
+      <obj_property name="ObjectShortName">sqi_pin_direction</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/io_buf_output_disable" type="array">
+      <obj_property name="ElementShortName">io_buf_output_disable[3:0]</obj_property>
+      <obj_property name="ObjectShortName">io_buf_output_disable[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/serial_in" type="array">
+      <obj_property name="ElementShortName">serial_in[3:0]</obj_property>
+      <obj_property name="ObjectShortName">serial_in[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/serial_out" type="array">
+      <obj_property name="ElementShortName">serial_out[3:0]</obj_property>
+      <obj_property name="ObjectShortName">serial_out[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/cmd_address_reg" type="array">
+      <obj_property name="ElementShortName">cmd_address_reg[16:0]</obj_property>
+      <obj_property name="ObjectShortName">cmd_address_reg[16:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/cmd_rw_reg" type="logic">
+      <obj_property name="ElementShortName">cmd_rw_reg</obj_property>
+      <obj_property name="ObjectShortName">cmd_rw_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/cmd_wdata_reg" type="array">
+      <obj_property name="ElementShortName">cmd_wdata_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">cmd_wdata_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/data_shifter_in" type="array">
+      <obj_property name="ElementShortName">data_shifter_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_shifter_in[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/data_shifter_out" type="array">
+      <obj_property name="ElementShortName">data_shifter_out[63:0]</obj_property>
+      <obj_property name="ObjectShortName">data_shifter_out[63:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_qspi_sram_ctrl/clk_counter" type="other">
+      <obj_property name="ElementShortName">clk_counter</obj_property>
+      <obj_property name="ObjectShortName">clk_counter</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider689">
+      <obj_property name="label">Command Sender</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_axis_cmd_driver/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_axis_cmd_driver/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_axis_cmd_driver/all_cmds_done_out" type="logic">
+      <obj_property name="ElementShortName">all_cmds_done_out</obj_property>
+      <obj_property name="ObjectShortName">all_cmds_done_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_axis_cmd_driver/error_count_out" type="array">
+      <obj_property name="ElementShortName">error_count_out[15:0]</obj_property>
+      <obj_property name="ObjectShortName">error_count_out[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_axis_cmd_driver/rom_addr" type="other">
+      <obj_property name="ElementShortName">rom_addr</obj_property>
+      <obj_property name="ObjectShortName">rom_addr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_basys3_top_spi_ram/u_basys3_top_spi_ram/u_axis_cmd_driver/state" type="other">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+</wave_config>

@@ -10,6 +10,10 @@ Library UNISIM;
 use UNISIM.vcomponents.all;
 
 entity basys3_top_spi_ram is
+    generic(
+        NUM_COMMANDS : integer := 16; -- 16384;
+        DATA_FILE    : string  := "../software/cmds.hex" -- "../software/rand_test_cmds.hex"
+    );
 	port(
 		CLK : in 	std_logic;
 		-- Switches
@@ -46,6 +50,7 @@ architecture rtl of basys3_top_spi_ram is
     port (   
         clk_out100 : out std_logic ;      
         clk_out20  : out std_logic ;      
+        clk_out10  : out std_logic;
         
         reset      : in  std_logic ;      
         locked     : out std_logic ;      
@@ -54,9 +59,10 @@ architecture rtl of basys3_top_spi_ram is
     );
     end component;
 
-    signal spi_clk20    : std_logic;
-
-    signal reset        :  STD_LOGIC;
+    signal spi_clk    : std_logic;
+    signal locked       : std_logic;
+    signal ext_reset        :  STD_LOGIC;
+    signal sys_reset      : std_logic;   
     signal cmd_ready    :  STD_LOGIC;
     signal cmd_valid    :  STD_LOGIC;
     signal cmd_address  :  STD_LOGIC_VECTOR(32-1 downto 0);
@@ -70,17 +76,25 @@ architecture rtl of basys3_top_spi_ram is
     signal all_cmds_done : std_logic;
     signal error_count  : std_logic_vector(16-1 downto 0);
     
+    attribute MARK_DEBUG : boolean;
+    attribute MARK_DEBUG of sys_reset : signal is True;     -- used to trigger ILAs
+    
 begin
     
-    reset <= BTN(4);
+    ext_reset <= BTN(4) or SW(4);
+    
+    sys_reset <= ext_reset or (not locked);
     
     LED(0) <= all_cmds_done;
-    LED(15 downto 1) <= (others => '0'); 
+    LED(15) <= ext_reset;
+    LED(14) <= sys_reset;
+    
+    LED(13 downto 1) <= (others => '0'); 
 
      u_qspi_sram_ctrl : entity work.qspi_sram_23lc1024_ctrl
              port map(
-            spi_clk     => spi_clk20,
-            reset       => reset   ,
+            spi_clk     => spi_clk,
+            reset       =>  sys_reset,
             
             SCK         => SCK     ,
             CS_N        => CS_N    ,
@@ -105,12 +119,12 @@ begin
     
     u_axis_cmd_driver : entity work.axis_cmd_driver
     generic map(
-        NUM_COMMANDS => 32768,
-        DATA_FILE => "../software/rand_test_cmds.hex"
+        NUM_COMMANDS => NUM_COMMANDS, -- 32768 uses 98% of BRAM
+        DATA_FILE => DATA_FILE
     )
     port map(
-        clk        => spi_clk20,
-        reset      => reset,
+        clk        => spi_clk,
+        reset      => sys_reset,
         cmd_ready_in   => cmd_ready,
         cmd_valid_out  => cmd_valid,
         cmd_address_out=> cmd_address,
@@ -127,15 +141,17 @@ begin
 
     -- displays a count of the number of errors
 	u_seven_seg : entity work.quad_seven_seg_driver
-	port map(clk => spi_clk20, display_data_in => error_count, sseg_ca => SSEG_CA, sseg_an => SSEG_AN);
+	port map(clk => spi_clk, display_data_in => error_count, sseg_ca => SSEG_CA, sseg_an => SSEG_AN);
 	
        
+   -- reduce SPI clkrate to 10MHz to improve timing
 	u_clk_wiz : clk_wiz_0  
 	port map(
         clk_out100 => open,     
-        clk_out20  => spi_clk20,
-        reset      => reset,     
-        locked     => open,     
+        clk_out20  => open,
+        clk_out10  => spi_clk,
+        reset      => ext_reset,     
+        locked     => locked,     
         clk_in1    => CLK 
     );
 
