@@ -141,7 +141,7 @@ begin
                     if rsp_valid_in = '1' then
                         rsp_ready_out <= '0';
                         
-                        command_counter <= command_counter + 1;
+                        
                         
                         if cmd_rw_out = '0' then -- if read response
                             if rsp_rdata_in /= cmd_data_out then    -- if there is a mismatch
@@ -161,9 +161,14 @@ begin
                     end if;
                     
                 when DONE => 
-                    
-                    
-                    
+                    command_counter <= command_counter + 1;
+                    -- basically do a reset without resetting counters
+                    cmd_valid_out <= '0';
+                    rsp_ready_out <= '0';
+                    rom_addr <= 0;
+                    state <= SEND_CMD;
+                    all_cmds_done_out <= '0';
+                        
             end case;
         end if;
         if reset = '1' then

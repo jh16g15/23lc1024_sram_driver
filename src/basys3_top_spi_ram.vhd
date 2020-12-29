@@ -13,7 +13,8 @@ entity basys3_top_spi_ram is
     generic(
 --        NUM_COMMANDS : integer := 16;
 --        DATA_FILE    : string  := "../software/cmds.hex";
-        NUM_COMMANDS : integer := 16384;
+        NUM_COMMANDS : integer := 16384;    -- 50% BRAM
+--        NUM_COMMANDS : integer := 32768;    -- 97% BRAM
         DATA_FILE    : string  := "../software/rand_test_cmds.hex"; -- "../software/cmds.hex" -- "../software/rand_test_cmds.hex"
         DEBUG_ILAS : boolean := false
     );
@@ -52,9 +53,7 @@ architecture rtl of basys3_top_spi_ram is
     component clk_wiz_0 
     port (   
         clk_out100 : out std_logic ;      
-        clk_out20  : out std_logic ;      
-        clk_out10  : out std_logic;
-        
+        clk_out22  : out std_logic;
         reset      : in  std_logic ;      
         locked     : out std_logic ;      
         
@@ -162,8 +161,8 @@ begin
 	u_clk_wiz : clk_wiz_0  
 	port map(
         clk_out100 => open,     
-        clk_out20  => open,
-        clk_out10  => spi_clk,
+        clk_out22  => spi_clk,
+        
         reset      => ext_reset,     
         locked     => locked,     
         clk_in1    => CLK 

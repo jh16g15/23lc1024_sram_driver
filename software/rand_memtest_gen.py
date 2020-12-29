@@ -18,7 +18,8 @@ ADDR_INC = 4                # 4 bytes per address
 
 RAND_MAX = 4294967295
 
-TEST_ADDR_LIMIT = 131072 / 4  # test first quarter (read+write = half addresses)
+# TEST_ADDR_LIMIT = 131072 / 2 # test first half of addresses (read+write = 97% BRAM)
+TEST_ADDR_LIMIT = 131072 / 4  # test first quarter (read+write = half addresses = 50% BRAM)
 
 # only test bottom bank
 NUMBER_OF_TESTS = TEST_ADDR_LIMIT * 2 /ADDR_INC
