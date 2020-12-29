@@ -11,8 +11,11 @@ use UNISIM.vcomponents.all;
 
 entity basys3_top_spi_ram is
     generic(
-        NUM_COMMANDS : integer := 16; -- 16384;
-        DATA_FILE    : string  := "../software/cmds.hex" -- "../software/rand_test_cmds.hex"
+--        NUM_COMMANDS : integer := 16;
+--        DATA_FILE    : string  := "../software/cmds.hex";
+        NUM_COMMANDS : integer := 16384;
+        DATA_FILE    : string  := "../software/rand_test_cmds.hex"; -- "../software/cmds.hex" -- "../software/rand_test_cmds.hex"
+        DEBUG_ILAS : boolean := false
     );
 	port(
 		CLK : in 	std_logic;
@@ -74,14 +77,17 @@ architecture rtl of basys3_top_spi_ram is
     signal rsp_ready    : std_logic;
     
     signal all_cmds_done : std_logic;
+    signal command_count  : std_logic_vector(16-1 downto 0);
     signal error_count  : std_logic_vector(16-1 downto 0);
+    
+    signal sseg_display_data : std_logic_vector(16-1 downto 0);
     
     attribute MARK_DEBUG : boolean;
     attribute MARK_DEBUG of sys_reset : signal is True;     -- used to trigger ILAs
     
 begin
     
-    ext_reset <= BTN(4) or SW(4);
+    ext_reset <= BTN(4);
     
     sys_reset <= ext_reset or (not locked);
     
@@ -91,8 +97,14 @@ begin
     
     LED(13 downto 1) <= (others => '0'); 
 
-     u_qspi_sram_ctrl : entity work.qspi_sram_23lc1024_ctrl
-             port map(
+    sseg_display_data <= command_count when SW(0) = '1' else error_count;
+
+
+    u_qspi_sram_ctrl : entity work.qspi_sram_23lc1024_ctrl
+        generic map (
+            DEBUG_ILAS => DEBUG_ILAS
+        )
+        port map(
             spi_clk     => spi_clk,
             reset       =>  sys_reset,
             
@@ -119,6 +131,7 @@ begin
     
     u_axis_cmd_driver : entity work.axis_cmd_driver
     generic map(
+        DEBUG_ILAS => DEBUG_ILAS,
         NUM_COMMANDS => NUM_COMMANDS, -- 32768 uses 98% of BRAM
         DATA_FILE => DATA_FILE
     )
@@ -136,12 +149,13 @@ begin
         rsp_ready_out => rsp_ready,
         
         all_cmds_done_out => all_cmds_done,
+        command_count_out => command_count,
         error_count_out => error_count
     );     
 
     -- displays a count of the number of errors
 	u_seven_seg : entity work.quad_seven_seg_driver
-	port map(clk => spi_clk, display_data_in => error_count, sseg_ca => SSEG_CA, sseg_an => SSEG_AN);
+	port map(clk => spi_clk, display_data_in => sseg_display_data, sseg_ca => SSEG_CA, sseg_an => SSEG_AN);
 	
        
    -- reduce SPI clkrate to 10MHz to improve timing

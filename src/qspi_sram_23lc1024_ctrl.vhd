@@ -35,7 +35,9 @@ use UNISIM.VComponents.all;
 
 entity qspi_sram_23lc1024_ctrl is
     Generic(
---        SERDES_WORD_SIZE : integer := 8;
+        DEBUG_ILAS : boolean := false;
+        
+        --        SERDES_WORD_SIZE : integer := 8;
         DATA_W : integer := 32; -- must be a multiple of SERDES_WORD_SIZE
         ADDR_W : integer := 17 -- not reparameterisable, some padding logic depends on this
     );
@@ -171,21 +173,21 @@ architecture rtl of qspi_sram_23lc1024_ctrl is
     constant BYTES_TO_TRANSFER : integer := 4; 
 
     attribute MARK_DEBUG : boolean;
-    attribute MARK_DEBUG of CS_N : signal is True;
-    attribute MARK_DEBUG of serial_in : signal is True;
-    attribute MARK_DEBUG of serial_out : signal is True;
-    attribute MARK_DEBUG of clk_counter : signal is True;
+    attribute MARK_DEBUG of CS_N : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of serial_in : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of serial_out : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of clk_counter : signal is DEBUG_ILAS;
 
-    attribute MARK_DEBUG of rsp_rdata_out : signal is True;
-    attribute MARK_DEBUG of rsp_valid_out : signal is True;
-    attribute MARK_DEBUG of data_shifter_in : signal is True;
-    attribute MARK_DEBUG of data_shifter_out : signal is True;
-    attribute MARK_DEBUG of io_buf_output_disable : signal is True;
-    attribute MARK_DEBUG of SCK_EN : signal is True;
-    attribute MARK_DEBUG of cmd_address_reg : signal is True;
-    attribute MARK_DEBUG of cmd_rw_reg : signal is True;
-    attribute MARK_DEBUG of cmd_wdata_reg : signal is True;
-    attribute MARK_DEBUG of state : signal is True;
+    attribute MARK_DEBUG of rsp_rdata_out : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of rsp_valid_out : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of data_shifter_in : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of data_shifter_out : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of io_buf_output_disable : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of SCK_EN : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of cmd_address_reg : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of cmd_rw_reg : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of cmd_wdata_reg : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of state : signal is DEBUG_ILAS;
     
    
 begin

@@ -13,6 +13,7 @@ use std.textio.all;
 
 entity axis_cmd_driver is
     generic(
+        DEBUG_ILAS : boolean := false;
         ADDR_W : integer := 32;
         DATA_W : integer := 32;
         CMD_W  : integer := 4;
@@ -31,6 +32,7 @@ entity axis_cmd_driver is
            rsp_valid_in     : in STD_LOGIC;
            rsp_ready_out    : out STD_LOGIC;
            
+           command_count_out : out STD_LOGIC_VECTOR(16-1 downto 0);
            error_count_out : out STD_LOGIC_VECTOR(16-1 downto 0);
            all_cmds_done_out : out std_logic
    );
@@ -80,24 +82,26 @@ architecture Behavioral of axis_cmd_driver is
     signal state : t_state; 
     
     signal error_counter : unsigned(15 downto 0):= (others => '0'); 
+    signal command_counter : unsigned(15 downto 0):= (others => '0'); 
     
     attribute MARK_DEBUG : boolean;
-    attribute MARK_DEBUG of error_counter : signal is True;
-    attribute MARK_DEBUG of state : signal is True;
-    attribute MARK_DEBUG of all_cmds_done_out : signal is True;
-    attribute MARK_DEBUG of rom_addr : signal is True;
-    attribute MARK_DEBUG of rom_en : signal is True;
-    attribute MARK_DEBUG of rom_data : signal is True;
+    attribute MARK_DEBUG of error_counter : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of command_counter : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of state : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of all_cmds_done_out : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of rom_addr : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of rom_en : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of rom_data : signal is DEBUG_ILAS;
    
     
-    attribute MARK_DEBUG of cmd_ready_in : signal is True;
-    attribute MARK_DEBUG of cmd_valid_out : signal is True;
-    attribute MARK_DEBUG of cmd_address_out : signal is True;
-    attribute MARK_DEBUG of cmd_rw_out : signal is True;
-    attribute MARK_DEBUG of cmd_data_out : signal is True;
-    attribute MARK_DEBUG of rsp_rdata_in : signal is True;
-    attribute MARK_DEBUG of rsp_valid_in : signal is True;
-    attribute MARK_DEBUG of rsp_ready_out : signal is True;
+    attribute MARK_DEBUG of cmd_ready_in : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of cmd_valid_out : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of cmd_address_out : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of cmd_rw_out : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of cmd_data_out : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of rsp_rdata_in : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of rsp_valid_in : signal is DEBUG_ILAS;
+    attribute MARK_DEBUG of rsp_ready_out : signal is DEBUG_ILAS;
     
     
 begin
@@ -109,7 +113,8 @@ begin
 --    valid_out <= valid;
 
     error_count_out <= std_logic_vector(error_counter);
-
+    command_count_out <= std_logic_vector(command_counter);
+    
 
     -- TODO: This currently does not infer into BRAMs 
     --
@@ -135,6 +140,8 @@ begin
                     
                     if rsp_valid_in = '1' then
                         rsp_ready_out <= '0';
+                        
+                        command_counter <= command_counter + 1;
                         
                         if cmd_rw_out = '0' then -- if read response
                             if rsp_rdata_in /= cmd_data_out then    -- if there is a mismatch
@@ -165,6 +172,7 @@ begin
             rom_addr <= 0;
             state <= SEND_CMD;
             error_counter <= (others => '0');
+            command_counter <= (others => '0');
             all_cmds_done_out <= '0';
         end if;
     end process;
