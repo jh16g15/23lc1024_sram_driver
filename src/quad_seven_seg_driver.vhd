@@ -35,7 +35,7 @@ architecture rtl of quad_seven_seg_driver is
     
 begin
 
-    slowclk <= clk_div_counter(16); -- (16) looks decent
+    slowclk <= clk_div_counter(14); -- (16) looks decent @ 20 MHz
     
     clk_div : process(clk) is
     begin
@@ -57,6 +57,8 @@ begin
             when 1 => char_data <= std_logic_vector(display_data_in( 7 downto  4));
             when 2 => char_data <= std_logic_vector(display_data_in(11 downto  8));
             when 3 => char_data <= std_logic_vector(display_data_in(15 downto 12)); 
+            when others => char_data <= x"F"; report("invalid digit_counter") severity error; 
+            
         end case;
     end process char_select;
     
@@ -119,6 +121,7 @@ begin
             when x"D" => sseg_ca(7 downto 0) <= b"10100001"; 
             when x"E" => sseg_ca(7 downto 0) <= b"10000110"; 
             when x"F" => sseg_ca(7 downto 0) <= b"10001110"; 
+            when others => sseg_ca(7 downto 0) <= b"01111111"; report("invalid char_data") severity error; 
         end case;
     end process char_decode;    
   
