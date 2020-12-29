@@ -112,7 +112,7 @@ architecture rtl of qspi_sram_23lc1024_ctrl is
     
      
     -- state machine for commands
-    type t_state is (SRESET, RESET_MODE_SPI, DEASSERT_CS_0, SET_MODE_SQI, DEASSERT_CS_1, IDLE, SEND_CMD_ADDR_WDATA, DUMMY, RDATA, DEASSERT_CS);
+    type t_state is (SRESET, START, RESET_MODE_SPI, DEASSERT_CS_0, SET_MODE_SQI, DEASSERT_CS_1, IDLE, SEND_CMD_ADDR_WDATA, DUMMY, RDATA, DEASSERT_CS);
     signal state : t_state := SRESET;
     
     type t_mode is (SPI, SQI);
@@ -170,6 +170,23 @@ architecture rtl of qspi_sram_23lc1024_ctrl is
      
     constant BYTES_TO_TRANSFER : integer := 4; 
 
+    attribute MARK_DEBUG : boolean;
+    attribute MARK_DEBUG of CS_N : signal is True;
+    attribute MARK_DEBUG of serial_in : signal is True;
+    attribute MARK_DEBUG of serial_out : signal is True;
+    attribute MARK_DEBUG of clk_counter : signal is True;
+
+    attribute MARK_DEBUG of rsp_rdata_out : signal is True;
+    attribute MARK_DEBUG of rsp_valid_out : signal is True;
+    attribute MARK_DEBUG of data_shifter_in : signal is True;
+    attribute MARK_DEBUG of data_shifter_out : signal is True;
+    attribute MARK_DEBUG of io_buf_output_disable : signal is True;
+    attribute MARK_DEBUG of SCK_EN : signal is True;
+    attribute MARK_DEBUG of cmd_address_reg : signal is True;
+    attribute MARK_DEBUG of cmd_rw_reg : signal is True;
+    attribute MARK_DEBUG of cmd_wdata_reg : signal is True;
+    attribute MARK_DEBUG of state : signal is True;
+    
    
 begin
     
@@ -231,13 +248,17 @@ begin
             if reset = '1' then
                 state  <= SRESET;
                 CS_N <= '1'; -- deassert chip select
-                
+                SCK_EN <= '0'; -- stop SCK
+                cmd_ready_out <= '0'; -- not ready to receive new command
             else 
            
             
             
                 case state is 
                     when SRESET => 
+                        state <= START;
+                        
+                    when START => 
                         -- make sure the RAM chip is in a known state
                         state <= RESET_MODE_SPI;
                         sqi_pin_direction <= '1';   -- write
@@ -422,7 +443,7 @@ begin
 	-- IO Buffers
 	
     SIO0_IOBUF : IOBUF
-        generic map (drive => 12, iostandard => "DEFAULT", slew => "SLOW")
+        generic map (drive => 12, iostandard => "DEFAULT", slew => "FAST")
         port map(
             O => serial_in(0), -- buffer output
             IO => SI_SIO0, -- buffer inout port (connect directly to top level pin)
@@ -430,7 +451,7 @@ begin
             T => io_buf_output_disable(0) -- 3-state enable input - high=input, low=output 
         );
     SIO1_IOBUF : IOBUF
-        generic map (drive => 12, iostandard => "DEFAULT", slew => "SLOW")
+        generic map (drive => 12, iostandard => "DEFAULT", slew => "FAST")
         port map(
             O => serial_in(1), -- buffer output
             IO => SO_SIO1, -- buffer inout port (connect directly to top level pin)
@@ -438,7 +459,7 @@ begin
             T => io_buf_output_disable(1) -- 3-state enable input - high=input, low=output 
         );
     SIO2_IOBUF : IOBUF
-        generic map (drive => 12, iostandard => "DEFAULT", slew => "SLOW")
+        generic map (drive => 12, iostandard => "DEFAULT", slew => "FAST")
         port map(
             O => serial_in(2), -- buffer output
             IO => SIO2, -- buffer inout port (connect directly to top level pin)
@@ -446,7 +467,7 @@ begin
             T => io_buf_output_disable(2) -- 3-state enable input - high=input, low=output 
         );
     SIO3_IOBUF : IOBUF
-        generic map (drive => 12, iostandard => "DEFAULT", slew => "SLOW")
+        generic map (drive => 12, iostandard => "DEFAULT", slew => "FAST")
         port map(
             O => serial_in(3), -- buffer output
             IO => HOLD_N_SIO3, -- buffer inout port (connect directly to top level pin)

@@ -85,6 +85,20 @@ architecture Behavioral of axis_cmd_driver is
     attribute MARK_DEBUG of error_counter : signal is True;
     attribute MARK_DEBUG of state : signal is True;
     attribute MARK_DEBUG of all_cmds_done_out : signal is True;
+    attribute MARK_DEBUG of rom_addr : signal is True;
+    attribute MARK_DEBUG of rom_en : signal is True;
+    attribute MARK_DEBUG of rom_data : signal is True;
+   
+    
+    attribute MARK_DEBUG of cmd_ready_in : signal is True;
+    attribute MARK_DEBUG of cmd_valid_out : signal is True;
+    attribute MARK_DEBUG of cmd_address_out : signal is True;
+    attribute MARK_DEBUG of cmd_rw_out : signal is True;
+    attribute MARK_DEBUG of cmd_data_out : signal is True;
+    attribute MARK_DEBUG of rsp_rdata_in : signal is True;
+    attribute MARK_DEBUG of rsp_valid_in : signal is True;
+    attribute MARK_DEBUG of rsp_ready_out : signal is True;
+    
     
 begin
 

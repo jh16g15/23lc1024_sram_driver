@@ -75,11 +75,11 @@ begin
     port map(
        clk        => clk        ,
        reset      => reset      ,
-       ready_in   => ready_in   ,
-       valid_out  => valid_out  ,
-       address_out=> address_out,
-       rw_out     => rw_out     , 
-     data_out   => data_out   
+       cmd_ready_in   => ready_in   ,
+       cmd_valid_out  => valid_out  ,
+       cmd_address_out=> address_out,
+       cmd_rw_out     => rw_out     , 
+       cmd_data_out   => data_out   
     );
     
 
